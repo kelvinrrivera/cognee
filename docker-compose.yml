@@ -1,8 +1,8 @@
 services:
   cognee:
     container_name: cognee
-    networks:
-      - cognee-network
+    #networks:
+    #  - cognee-network
     build:
       context: .
       dockerfile: Dockerfile
@@ -31,8 +31,8 @@ services:
     container_name: cognee-mcp
     profiles:
       - mcp
-    networks:
-      - cognee-network
+    #networks:
+      #- cognee-network
     build:
       context: .
       dockerfile: cognee-mcp/Dockerfile
@@ -79,8 +79,8 @@ services:
     ports:
       - 3000:3000
       # - 9229:9229 # Debugging
-    networks:
-      - cognee-network
+    #networks:
+     # - cognee-network
 
   neo4j:
     image: neo4j:latest
@@ -93,8 +93,8 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/pleaseletmein
       - NEO4J_PLUGINS=["apoc", "graph-data-science"]
-    networks:
-      - cognee-network
+    #networks:
+     # - cognee-network
 
   falkordb:
     image: falkordb/falkordb:edge
@@ -104,8 +104,8 @@ services:
     ports:
       - 6379:6379
       - 3001:3000
-    networks:
-      - cognee-network
+    #networks:
+      #- cognee-network
 
   chromadb:
     image: chromadb/chroma:0.6.3
@@ -120,8 +120,8 @@ services:
       - CHROMA_SERVER_AUTH_PROVIDER=chromadb.auth.token.TokenAuthServerProvider
     volumes:
       - .chromadb_data/:/chroma/chroma/
-    networks:
-      - cognee-network
+    #networks:
+      #- cognee-network
     ports:
       - "3002:8000"
 
@@ -137,12 +137,12 @@ services:
       # - postgres_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    networks:
-      - cognee-network
+    #networks:
+      #- cognee-network
 
-networks:
-  cognee-network:
-    name: cognee-network
+#networks:
+  #cognee-network:
+    #name: cognee-network
 
 volumes:
   chromadb_data:
